@@ -1,22 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IA</title>    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="scss/custom.css">
+    <title>IA como herramienta de estudio</title>    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Estilos específicos para la sección de cabecera superior */
+        .hero-ia {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .img-aesthetic {
+            max-height: 280px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* DISEÑO DE LAS TARJETAS (Ecosistema de IA) */
+        .tarjeta-ia-personalizada {
+            background-color: #ffffff !important; /* Forzamos fondo blanco limpio */
+            border: 1px solid #e3dcd3 !important; /* Borde sutil color arena/marrón muy claro */
+            border-radius: 16px !important;
+            padding: 24px !important;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .tarjeta-ia-personalizada:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(74, 38, 0, 0.15) !important; /* Sombra con la tonalidad del proyecto */
+        }
+
+        /* Caja contenedora del icono de la IA */
+        .caja-icono-ia {
+            width: 55px;
+            height: 55px;
+            background-color: #f0e2cf !important; /* Fondo beige claro original */
+            color: #4a2600 !important; /* Icono marrón oscuro */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.6rem;
+        }
+
+        /* Etiquetas de las esquinas (Apuntes, Trivias, etc.) */
+        .etiqueta-ia-badge {
+            background-color: #4a2600 !important; /* Fondo marrón oscuro */
+            color: #ffffff !important; /* Texto blanco */
+            padding: 5px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
+
+    <nav class="navbar navbar-expand-lg navbar-dark custom-nav" style="background-color: #4a2600;">
+        <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="menuPrincipal">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-pills">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Inicio</a>
                     </li>
@@ -33,30 +89,160 @@
             </div>
         </div>
     </nav>
-       <div class="categoria-container">
-    <a href="" class="tarjeta-categoria"  name ="Base de datos"> 
-        <div class="icono-card">
-            <span>🗄️</span>
-        </div>
-        <h2>Base de datos</h2>
-    </a>
 
-    <a href="" class="tarjeta-categoria" name = "Analisis Matematico"> 
-        <div class="icono-card">
-            <span>📐</span>
-        </div>
-        <h2>Analisis Matematico</h2>
-    </a>
+    <main class="container my-5">
+        
+        <section class="hero-ia p-4 p-md-5 mb-5">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7">
+                    <span class="badge text-uppercase tracking-wider mb-3 bg-dark text-white px-3 py-2">Enfoque Académico</span>
+                    <h1 class="text-start p-0 mb-3 fw-bold" style="font-family: 'Poppins', sans-serif !important; color: #4a2600; font-size: 2.5rem;">
+                        IA como herramienta de estudio
+                    </h1>
+                    <h2 class="h4 text-secondary mb-3">
+                        Aprender mejor, no hacer menos.
+                    </h2>
+                    <p class="fs-5 mb-0" style="color: #333333; line-height: 1.6;">
+                        La inteligencia artificial se ha convertido en una aliada excepcional para acompañar tu camino universitario. Utilizada correctamente, expande tu capacidad de comprender temas complejos, organizar información masiva y practicar de manera interactiva, manteniendo siempre tu pensamiento crítico como el motor principal.
+                    </p>
+                </div>
+                <div class="col-lg-5 text-center">
+                    <img src="image/imgIA.png" alt="IA Educativa" class="img-fluid img-aesthetic w-100">
+                </div>
+            </div>
+        </section>
 
-    <a href="redes.html" class="tarjeta-categoria" name = "Comunicacion y redes"> 
-        <div class="icono-card">
-            <span>🌐</span>
-        </div>
-        <h2>Comunicacion y redes</h2>
-    </a>
+        <section class="container my-5 py-4">
+    <div class="text-center mb-5">
+        <h3 class="fw-bold" style="color: #4a2600; font-size: 2.2rem; font-family: 'Poppins', sans-serif;">Ecosistema de Aprendizaje Inteligente</h3>
+        <p class="text-secondary mx-auto fs-5" style="max-width: 700px;">Cada herramienta tiene una fortaleza única. Elegí la adecuada para cada tarea.</p>
+    </div>
 
-    <!-- Añadir más tarjetas con JS -->
-   </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <style>
+        .ia-card-container {
+            background-color: #ffffff !important;
+            border: 1px solid #e9e2db !important;
+            border-radius: 16px !important;
+            box-shadow: 0 4px 20px rgba(74, 38, 0, 0.06) !important;
+            transition: all 0.3s ease-in-out !important;
+            overflow: hidden;
+        }
+        
+        .ia-card-container:hover {
+            transform: translateY(-6px) !important;
+            box-shadow: 0 12px 30px rgba(74, 38, 0, 0.15) !important;
+            border-color: #d0c4b5 !important;
+        }
+
+        .ia-icon-box {
+            width: 48px;
+            height: 48px;
+            background-color: #f5ece1 !important;
+            color: #4a2600 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 1.4rem;
+        }
+
+        .ia-badge-text {
+            background-color: #4a2600 !important;
+            color: #ffffff !important;
+            font-size: 0.75rem !important;
+            font-weight: 600 !important;
+            padding: 6px 14px !important;
+            border-radius: 50px !important;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        
+        <div class="col">
+            <div class="card h-100 ia-card-container p-4">
+                <div class="card-body p-0 d-flex flex-column">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="ia-icon-box">
+                            <i class="bi bi-folder2-open"></i>
+                        </div>
+                        <span class="ia-badge-text">Apuntes</span>
+                    </div>
+                    <h4 class="h5 fw-bold mb-3" style="color: #4a2600; font-family: 'Poppins', sans-serif;">NotebookLM</h4>
+                    <p class="text-secondary small flex-grow-1 mb-0" style="line-height: 1.6; font-size: 0.9rem;">
+                        La mejor opción para procesar tus propios apuntes y documentos pesados. Genera resúmenes estructurados, guías de estudio e incluso podcasts educativos dinámicos para repasar de oído.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 ia-card-container p-4">
+                <div class="card-body p-0 d-flex flex-column">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="ia-icon-box">
+                            <i class="bi bi-list-check"></i>
+                        </div>
+                        <span class="ia-badge-text">Trivias</span>
+                    </div>
+                    <h4 class="h5 fw-bold mb-3" style="color: #4a2600; font-family: 'Poppins', sans-serif;">Gemini</h4>
+                    <p class="text-secondary small flex-grow-1 mb-0" style="line-height: 1.6; font-size: 0.9rem;">
+                        Tu aliado ideal para la autoevaluación. Es excelente diseñando cuestionarios personalizados y exámenes de opción múltiple (multiple choice) para detectar debilidades antes del parcial.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 ia-card-container p-4">
+                <div class="card-body p-0 d-flex flex-column">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="ia-icon-box">
+                            <i class="bi bi-chat-left-quote"></i>
+                        </div>
+                        <span class="ia-badge-text">Desarrollo</span>
+                    </div>
+                    <h4 class="h5 fw-bold mb-3" style="color: #4a2600; font-family: 'Poppins', sans-serif;">ChatGPT</h4>
+                    <p class="text-secondary small flex-grow-1 mb-0" style="line-height: 1.6; font-size: 0.9rem;">
+                        Perfecto para trabajar preguntas de desarrollo y argumentación. Te ayuda a interconectar conceptos de diferentes materias, profundizar teorías y estructurar respuestas extensas.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 ia-card-container p-4">
+                <div class="card-body p-0 d-flex flex-column">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="ia-icon-box">
+                            <i class="bi bi-lightning-charge"></i>
+                        </div>
+                        <span class="ia-badge-text">Explicación</span>
+                    </div>
+                    <h4 class="h5 fw-bold mb-3" style="color: #4a2600; font-family: 'Poppins', sans-serif;">Copilot</h4>
+                    <p class="text-secondary small flex-grow-1 mb-0" style="line-height: 1.6; font-size: 0.9rem;">
+                        Especialista en desglosar términos extremadamente complejos. Te ofrece analogías cotidianas, aclaraciones paso a paso y ejemplos prácticos que simplifican la lectura técnica.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+        <section class="p-4 rounded-4 text-white text-center" style="background: linear-gradient(135deg, #4a2600 0%, #211000 100%);">
+            <div class="mx-auto py-3" style="max-width: 750px;">
+                <i class="bi bi-shield-check fs-1 mb-3 d-block text-warning"></i>
+                <h3 class="fw-bold h4 mb-3">El Compromiso del Estudiante</h3>
+                <p class="mb-0 style= font-size: 1.05rem; opacity: 0.95; line-height: 1.6;">
+                    Ninguna inteligencia artificial puede hacer el proceso de sinapsis por vos. Estas tecnologías no sustituyen tu razonamiento, sino que potencian tu curiosidad. La base del éxito académico sigue y seguirá siendo tu constancia, tu esfuerzo personal y tu honestidad intelectual.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

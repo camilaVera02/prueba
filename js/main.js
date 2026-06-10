@@ -70,8 +70,30 @@ function cargarPagina(url) {
 // ==========================================
 // 2. INTEGRACIÓN CON EL SERVIDOR GRAPHQL
 // ==========================================
-const MAPA_ICONOS = { BDD1: "🗄️", REDES1: "🌐", ING1: "💻", SO1: "🐧", AC1: "🏗️", AC2: "📟" };
+const MAPA_ICONOS = {
+    BDD1: "🗄️",
+    REDES1: "🌐",
+    ING1: "💻",
+    SO1: "🐧",
+    AC1: "🏗️",
+    AC2: "📟",
+    APD: "📚",
+    PROB: "🌳",
 
+    REDES2: "📡",
+    ING2: "⚙️",
+    DISCRETA: "🔢",
+    ALGEBRA: "➗",
+    LF: "📜",
+    ALGORITMOS: "🧠",
+    TA: "🔧",
+    POO1: "☕",
+    POO2: "🚀",
+    UCYS: "🏛️",
+    AM1: "📈",
+    AM2: "📉",
+    BDD2: "🗃️"
+};
 function inicializarMateriasGraphQL() {
     fetch("https://servidor-graphql-production.up.railway.app/", {
         method: "POST",
