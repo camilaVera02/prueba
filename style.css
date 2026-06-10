@@ -1,0 +1,656 @@
+/* =======================================================
+   1. VARIABLES DE DISEÑO (ORIGINALES DE TU STYLE.CSS)
+   ======================================================= */
+:root {
+    --navbar: #6b3700;
+    --navbar-hover: #a85b0b;
+    --background: #ded2bf;
+    --card: #f8f8f8;
+    --card-dark: #dfc589;  /* Añadido para los ítems de resúmenes de materias */
+    --text: #3b2412;
+    --text-light: #72533f;
+    --radius: 16px;
+    --shadow: 0 4px 12px rgba(0,0,0,.08);
+    --shadow-hover: 0 12px 20px rgba(121, 85, 72, 0.15); /* Rejilla de materias */
+}
+
+/* =======================================================
+   2. RESETEOS Y AJUSTES GENERALES ORIGINALES
+   ======================================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--background);
+    color: var(--text);
+    font-size: 16px;
+}
+
+/* Tipografías Globales de Secciones */
+h1 {
+    padding: 23px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    color: var(--text);
+}
+
+/* =======================================================
+   3. BARRAS DE NAVEGACIÓN ORIGINALES Y COMPATIBLES
+   ======================================================= */
+nav {
+    padding: 10px 30px;
+    background-color: #5d350a; /* Fondo oscuro universitario */
+}
+
+.custom-nav {
+    background-color: var(--navbar) !important;
+    padding: 0.75rem 0;
+}
+
+.nav-item, a.nav-link {
+    color: #ffffff !important;
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 20px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.custom-nav .nav-link:hover, 
+.custom-nav .nav-link.active,
+a.nav-link.active {
+    color: #ffffff !important;
+    background-color: var(--navbar-hover) !important;
+    border-radius: 8px;
+}
+
+/* =======================================================
+   4. SECCIÓN ESPECÍFICA DE TÉCNICAS DE ESTUDIO (100% ORIGINAL)
+   ======================================================= */
+/* Modificaciones al Hero original y Título */
+.hero {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 40px;
+    box-shadow: var(--shadow);
+}
+
+/* Mantiene el título "Aprendé a estudiar mejor" idéntico */
+.hero h1.fw-bold {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 700 !important;
+    text-align: left !important;
+    color: var(--text);
+    padding: 0 0 10px 0;
+}
+
+.badge {
+    background: #f0e2cf;
+    color: var(--navbar);
+    padding: 8px 16px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.hero-highlight {
+    margin-top: 20px;
+    color: var(--navbar);
+    font-weight: 600;
+}
+
+.hero-image-container img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* Tarjetas de Beneficios originales */
+.benefit-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 25px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+.benefit-card i {
+    font-size: 2.5rem;
+    color: var(--navbar);
+    margin-bottom: 15px;
+}
+
+/* Tarjetas de Categorías originales */
+.category-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 30px;
+    cursor: pointer;
+    transition: .25s;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+}
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12);
+}
+.category-card i {
+    font-size: 3rem;
+    color: var(--navbar);
+    margin-bottom: 20px;
+}
+.category-card button {
+    border: none;
+    background: var(--navbar);
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .2s;
+}
+.category-card button:hover {
+    background: var(--navbar-hover);
+}
+
+/* Estilos complementarios para el Carrusel */
+.custom-carousel-btn {
+    width: 45px;
+    height: 45px;
+    background-color: var(--card);
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text);
+    font-size: 1.25rem;
+    opacity: 0.9;
+    box-shadow: var(--shadow);
+    transition: all 0.2s ease;
+}
+.custom-carousel-btn:hover {
+    background-color: var(--navbar);
+    color: white;
+    opacity: 1;
+}
+.carousel-control-prev { left: -25px; }
+.carousel-control-next { right: -25px; }
+
+/* Componentes complementarios de Gestión del Tiempo */
+.text-light-custom {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.img-hero-gt {
+    max-height: 260px;
+    width: 100%;
+    object-fit: cover;
+    border: 5px solid white;
+}
+
+/* Beneficios Horizontales */
+.benefit-horizontal-card {
+    background: var(--card);
+    border: 1px solid rgba(0,0,0,0.03);
+    box-shadow: var(--shadow);
+}
+.icon-shape {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+/* Alertas Soft Colors */
+.bg-warning-soft { background-color: #fef9c3; }
+.bg-danger-soft { background-color: #fee2e2; }
+.bg-success-soft { background-color: #dcfce7; }
+.bg-primary-soft { background-color: #dbeafe; }
+
+/* Tarjetas de Técnicas */
+.tech-card {
+    background: var(--card);
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.tech-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08) !important;
+}
+.tech-img-container {
+    height: 160px;
+    overflow: hidden;
+    width: 100%;
+}
+.tech-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.btn-gt-primary {
+    background-color: var(--navbar);
+    color: white;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 10px;
+    border: none;
+    transition: 0.2s;
+}
+.btn-gt-primary:hover {
+    background-color: var(--navbar-hover);
+    color: white;
+}
+
+/* Tabla Avanzada / Comparador */
+.custom-gt-table thead {
+    background-color: var(--navbar);
+}
+.custom-gt-table thead th {
+    color: white !important;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 14px;
+}
+.custom-gt-table tbody td {
+    padding: 14px;
+    font-size: 0.88rem;
+    color: var(--text-light);
+    border-bottom: 1px solid #f1e9dc;
+}
+.badge-table {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+.bg-success-light { background-color: #e6f4ea; }
+.bg-warning-light { background-color: #fef7e0; }
+.bg-danger-light { background-color: #fce8e6; }
+
+/* Quiz / Cuestionario interactivo (Recomendador de Técnicas) */
+.quiz-section {
+    background: linear-gradient(135deg, var(--navbar) 0%, #4a2600 100%);
+    border-radius: var(--radius);
+    padding: 40px;
+}
+.quiz-option-card {
+    border: 2px solid #e1dcd6;
+    background-color: var(--card);
+    transition: all 0.2s ease;
+}
+.quiz-option-card:hover {
+    background-color: #fcfbfa;
+    border-color: var(--navbar-hover);
+}
+/* Crucial para que main.js resalte la recomendación seleccionada */
+.quiz-option-card.selected {
+    border-color: var(--navbar) !important;
+    background-color: #fbf5ed !important;
+}
+
+/* Recursos Cards */
+.resource-icon-box {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+.x-small { font-size: 0.78rem; }
+.resource-card a {
+    color: var(--navbar);
+}
+.resource-card a:hover {
+    color: var(--navbar-hover);
+}
+
+/* =======================================================
+   5. SISTEMA DE MATERIAS E INICIO (MÓDULO DE EXPANSION DINÁMICA)
+   ======================================================= */
+.categoria-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.tarjeta-categoria {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    text-decoration: none;
+    background-color: #ffffff;
+    border: 1px solid #d7ccc8;
+    border-radius: 12px;
+    min-height: 200px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.tarjeta-categoria:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: #8d6e63;
+}
+
+.icono-card {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icono-card span {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #8b5a2b;
+}
+
+.tarjeta-categoria h2 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #4e342e;
+    text-align: center;
+    margin: 0;
+}
+
+/* Detalle de las Materias e Iframes */
+.titulo-materia {
+    text-align: center;
+    color: #3e2723;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: clamp(2rem, 8vw, 4.5rem);
+}
+
+.title-categorias {
+    text-align: left;
+    color: #3e2723;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.resumenes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 40px; 
+    padding: 20px; 
+    justify-content: center;
+    align-items: start; 
+}
+
+.item-resumen {
+    background-color: var(--card-dark);
+    border: 1px solid #d7ccc8;
+    border-radius: 12px; 
+    padding: 25px 20px;
+    box-shadow: 0 4px 10px rgba(121, 85, 72, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.item-resumen h3 {
+    color: #3e2723;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 20px; 
+    text-align: center;
+}
+
+.resumen-iframe {
+    width: 100%;
+    max-width: 900px;
+    height: 600px; 
+    margin: 0 auto; 
+    border: 2px solid #cfa169; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(78, 52, 46, 0.1); 
+}
+
+.videos-container {
+    padding-bottom: 80px;
+}
+
+.contenedor-bibliografia {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.list-group-bibliografia .list-group-item {
+    padding: 25px 30px;
+    border-color: #d7ccc8;
+    background-color: #ffffff;
+    color: #4e342e;
+}
+
+.list-group-bibliografia .list-group-item.active {
+    background-color: #795548;
+    border-color: #795548;
+    color: #ffffff;
+}
+
+.list-group-bibliografia .list-group-item h5 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: inherit;
+}
+
+.list-group-bibliografia .list-group-item p {
+    font-size: 1.1rem;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.list-group-bibliografia .list-group-item small {
+    font-size: 0.95rem;
+}
+
+.list-group-bibliografia .text-muted {
+    color: #8d6e63 !important;
+}
+
+.btn-minimalista {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #5d350a; 
+    background-color: transparent;
+    border: 1px solid #5d350a; 
+    border-radius: 20px;
+    margin: 20px 0 10px 15px; 
+    padding: 10px 16px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-minimalista .flecha {
+    font-size: 1.4rem; 
+    margin-right: 6px;
+    line-height: 0;
+    transition: transform 0.2s ease;
+}
+
+.btn-minimalista:hover {
+    background-color: rgba(93, 53, 10, 0.05); 
+    color: #5d350a;
+    box-shadow: 0 2px 6px rgba(93, 53, 10, 0.1);
+}
+
+.btn-minimalista:hover .flecha {
+    transform: translateX(-3px);
+}
+
+/* =======================================================
+   6. ELEMENTOS FLOTANTES INTEGRADOS (100% FIEL A TU SCRIPT)
+   ======================================================= */
+/* Botón Subir Global Integrado */
+#btnScrollToTop {
+    display: none; /* JS cambia esto a flex dinámicamente */
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 1050;
+    width: 46px;
+    height: 46px;
+    background-color: var(--navbar);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+}
+#btnScrollToTop:hover {
+    background-color: var(--navbar-hover);
+    transform: scale(1.08);
+}
+
+/* REPRODUCTOR ARRASTRABLE ORIGINAL SIN PISARSE */
+.floating-video-box {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    width: 380px !important;
+    max-width: 85vw !important; /* Evita salirse en celulares */
+    z-index: 2100 !important;   /* Z-index alto para flotar SOBRE los iframes de PDF */
+    background-color: #1a1a1a !important;
+    border: 2px solid #a85b0b !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+    user-select: none;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Clases específicas para el colapso por JS del reproductor flotante original */
+.floating-video-box.minimized {
+    width: 200px !important;
+    height: auto !important;
+}
+.floating-video-box.minimized .ratio {
+    display: none !important; /* Oculta el video al minimizar manteniendo la barra */
+}
+
+/* Indicador de agarre */
+.draggable-header {
+    cursor: grab;
+    background-color: #6b3700 !important;
+    border-bottom: 1px solid #a85b0b;
+    padding: 10px 15px;
+}
+.draggable-header:active {
+    cursor: grabbing;
+}
+
+.video-controls button {
+    line-height: 1;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    background: transparent;
+    border: none;
+    color: white;
+}
+.video-controls button:hover {
+    opacity: 1;
+}
+
+.btn-outline-brown {
+    border: 2px solid var(--navbar);
+    color: var(--navbar) !important;
+    background: transparent;
+    transition: all 0.2s ease-in-out;
+}
+.btn-outline-brown:hover {
+    background-color: var(--navbar);
+    color: #ffffff !important;
+}
+
+/* =======================================================
+   7. RESPONSIVIDAD Y CONSULTAS DE MEDIOS (MEDIA QUERIES)
+   ======================================================= */
+@media (max-width: 991px) {
+    #menuPrincipal {
+        margin-top: 15px;
+        background-color: #4e2b08;
+        border-radius: 8px;
+        padding: 10px 0;
+    }
+    .nav-item { text-align: center; margin-right: 0; }
+    a.nav-link { padding: 15px 20px !important; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+}
+
+@media (max-width: 767.98px) {
+    .carousel-item .row {
+        flex-direction: column;
+    }
+    .carousel-control-prev { left: 5px; }
+    .carousel-control-next { right: 5px; }
+}
+
+@media (max-width: 576px) {
+    .btn-minimalista {
+        padding: 10px 20px;
+        font-size: 1.15rem !important; 
+        margin: 20px 0 10px 15px;
+    }
+
+    .titulo-materia {
+        font-size: 2.3rem !important;
+    }
+
+    .resumenes-container {
+        grid-template-columns: 1fr !important;
+        padding: 15px;
+    }
+
+    .resumen-iframe {
+        height: 450px !important;
+    }
+
+    .categoria-container {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .tarjeta-categoria {
+        min-height: 140px !important;
+        padding: 15px 10px !important;
+    }
+
+    .icono-card span {
+        font-size: 2.2rem !important;
+    }
+
+    .tarjeta-categoria h2 {
+        font-size: 0.95rem !important;
+    }
+
+    .floating-video-box {
+        width: 250px !important;
+    }
+}
