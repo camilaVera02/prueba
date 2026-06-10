@@ -1,5 +1,5 @@
 // ==========================================
-// 1. CENTRALIZADOR DE NAVEGACIÓN SPA
+// 1. CENTRALIZADOR DE NAVEGACIÓN SPA (CORREGIDO PARA GITHUB PAGES)
 // ==========================================
 function cargarPagina(url) {
     let idMateria = null;
@@ -9,9 +9,22 @@ function cargarPagina(url) {
         idMateria = partes[1]; 
     }
 
-    fetch(url)
+    // --- SOLUCIÓN PARA GITHUB PAGES ---
+    // Detectamos si estamos en producción (GitHub) o en desarrollo (Localhost)
+    let urlParaFetch = url;
+    if (window.location.hostname.includes("github.io")) {
+        // Capturamos el nombre de tu repositorio dinámicamente desde la URL
+        const rutaPath = window.location.pathname.split('/')[1]; 
+        // Si la url que entra no viene ya con el nombre del repositorio, se lo sumamos
+        if (!url.startsWith(`/${rutaPath}`) && !url.startsWith(`${rutaPath}/`)) {
+            urlParaFetch = `/${rutaPath}/${url.replace(/^\//, '')}`;
+        }
+    }
+
+    // Hacemos el fetch con la URL corregida para el entorno
+    fetch(urlParaFetch)
         .then(response => {
-            if (!response.ok) throw new Error("Error al cargar la sección: " + url);
+            if (!response.ok) throw new Error("Error al cargar la sección: " + urlParaFetch);
             return response.text();
         })
         .then(html => {
@@ -27,7 +40,7 @@ function cargarPagina(url) {
 
             window.scrollTo({ top: 0, behavior: 'instant' });
 
-            // Sincronizar Navbar Activa
+            // Sincronizar Navbar Activa (usamos la url original para no romper los comparadores)
             document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(url)) {
@@ -53,10 +66,6 @@ function cargarPagina(url) {
             }
         });
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    cargarPagina('inicio-contenido.html'); 
-});
 
 // ==========================================
 // 2. INTEGRACIÓN CON EL SERVIDOR GRAPHQL
