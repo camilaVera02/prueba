@@ -1,4 +1,17 @@
 // ==========================================
+// 0. CONFIGURACIÓN DINÁMICA DEL SERVIDOR (PLAN B EN LOCAL INTEGRADO)
+// ==========================================
+function obtenerEndpointServidor() {
+    const localhostQuery = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    // Si estás en local, usa el puerto 4000 (cambialo si tu backend usa otro). Si no, usa Railway.
+    return localhostQuery 
+        ? "http://localhost:4000/" 
+        : "https://servidor-graphql-production.up.railway.app/";
+}
+
+const ENDPOINT_SERVER = obtenerEndpointServidor();
+
+// ==========================================
 // 1. CENTRALIZADOR DE NAVEGACIÓN SPA (CORREGIDO PARA GITHUB PAGES)
 // ==========================================
 function cargarPagina(url) {
@@ -10,18 +23,14 @@ function cargarPagina(url) {
     }
 
     // --- SOLUCIÓN PARA GITHUB PAGES ---
-    // Detectamos si estamos en producción (GitHub) o en desarrollo (Localhost)
     let urlParaFetch = url;
     if (window.location.hostname.includes("github.io")) {
-        // Capturamos el nombre de tu repositorio dinámicamente desde la URL
         const rutaPath = window.location.pathname.split('/')[1]; 
-        // Si la url que entra no viene ya con el nombre del repositorio, se lo sumamos
         if (!url.startsWith(`/${rutaPath}`) && !url.startsWith(`${rutaPath}/`)) {
             urlParaFetch = `/${rutaPath}/${url.replace(/^\//, '')}`;
         }
     }
 
-    // Hacemos el fetch con la URL corregida para el entorno
     fetch(urlParaFetch)
         .then(response => {
             if (!response.ok) throw new Error("Error al cargar la sección: " + urlParaFetch);
@@ -40,7 +49,7 @@ function cargarPagina(url) {
 
             window.scrollTo({ top: 0, behavior: 'instant' });
 
-            // Sincronizar Navbar Activa (usamos la url original para no romper los comparadores)
+            // Sincronizar Navbar Activa
             document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(url)) {
@@ -71,31 +80,15 @@ function cargarPagina(url) {
 // 2. INTEGRACIÓN CON EL SERVIDOR GRAPHQL
 // ==========================================
 const MAPA_ICONOS = {
-    BDD1: "🗄️",
-    REDES1: "🌐",
-    ING1: "💻",
-    SO1: "🐧",
-    AC1: "🏗️",
-    AC2: "📟",
-    APD: "📚",
-    PROB: "🌳",
-
-    REDES2: "📡",
-    ING2: "⚙️",
-    DISCRETA: "🔢",
-    ALGEBRA: "➗",
-    LF: "📜",
-    ALGORITMOS: "🧠",
-    TA: "🔧",
-    POO1: "☕",
-    POO2: "🚀",
-    UCYS: "🏛️",
-    AM1: "📈",
-    AM2: "📉",
-    BDD2: "🗃️"
+    BDD1: "🗄️", REDES1: "🌐", ING1: "💻", SO1: "🐧", AC1: "🏗️",
+    AC2: "📟", APD: "📚", PROB: "🌳", REDES2: "📡", ING2: "⚙️",
+    DISCRETA: "🔢", ALGEBRA: "➗", LF: "📜", ALGORITMOS: "🧠",
+    TA: "🔧", POO1: "☕", POO2: "🚀", UCYS: "🏛️", AM1: "📈",
+    AM2: "📉", BDD2: "🗃️"
 };
+
 function inicializarMateriasGraphQL() {
-    fetch("https://servidor-graphql-production.up.railway.app/", {
+    fetch(ENDPOINT_SERVER, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: `query { materias { id nombre } }` })
@@ -123,16 +116,21 @@ function inicializarMateriasGraphQL() {
     .catch(err => {
         console.error(err);
         const contenedor = document.querySelector(".categoria-container");
-        if(contenedor) contenedor.innerHTML = `<div class="alert alert-danger w-100 text-center">Error al conectar con Apollo Server.</div>`;
+        if(contenedor) contenedor.innerHTML = `<div class="alert alert-danger w-100 text-center">Error al conectar con el servidor Apollo.</div>`;
     });
 }
 
 function inicializarDetalleMateriaGraphQL(idMateria) {
+  
     function limpiarUrlDrive(urlOriginal) {
         if (!urlOriginal || urlOriginal === "---") return null;
-        const idMatch = urlOriginal.match(/\/d\/([a-zA-Z0-9-_]+)/);
+        
+        // Extrae el ID del archivo de Google Drive de cualquier formato estándar de URL
+        const idMatch = urlOriginal.match(/\/d\/([a-zA-Z0-9-_]+)/) || urlOriginal.match(/id=([a-zA-Z0-9-_]+)/);
+        
         if (idMatch && idMatch[1]) {
-            return `https://docs.google.com/viewer?url=https://drive.google.com/uc?id=${idMatch[1]}&embedded=true`;
+            // ENFÁTICO: Usamos /preview nativo de Drive. No fuerza descargas si falla.
+            return `https://drive.google.com/file/d/${idMatch[1]}/preview`;
         }
         return urlOriginal;
     }
@@ -145,7 +143,8 @@ function inicializarDetalleMateriaGraphQL(idMateria) {
         return idMatch && idMatch[1] ? `https://www.youtube.com/embed/${idMatch[1]}` : urlLimpia;
     }
 
-    fetch("https://servidor-graphql-production.up.railway.app/", {
+    // QUERY INTACTA + AGREGADO: Se añade 'descripcion' explícitamente a la consulta
+    fetch(ENDPOINT_SERVER, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -153,6 +152,8 @@ function inicializarDetalleMateriaGraphQL(idMateria) {
               query {
                 materiaPorId(id: "${idMateria}") {
                   nombre
+                  descripcion
+                  visualizaciones
                   resumenes { titulo pdfUrl }
                   videos { titulo url }
                   bibliografia { titulo autor editorial }
@@ -166,7 +167,39 @@ function inicializarDetalleMateriaGraphQL(idMateria) {
         const materia = resultado.data.materiaPorId;
         if (!materia) return;
 
+        // Renderizado del título
         document.querySelector(".titulo-materia").textContent = materia.nombre;
+        
+        // AGREGADO SEGURO: Inyección dinámica de la descripción obtenida
+        const descripcionP = document.querySelector(".descripcion p.lead");
+        if (descripcionP) {
+            descripcionP.textContent = materia.descripcion || "Sin descripción disponible para esta materia.";
+        }
+        
+        // Renderizar el contador de vistas si el elemento existe en el HTML
+        const contadorEl = document.getElementById("contador-vistas");
+        if (contadorEl) {
+            contadorEl.textContent = materia.visualizaciones || 0;
+        }
+
+        // MUTACIÓN AUTOMÁTICA DE ENTRADA: Registra la visualización en background
+        fetch(ENDPOINT_SERVER, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                query: `mutation { registrarVisualizacion(materiaId: "${idMateria}") { visualizaciones } }`
+            })
+        })
+        .then(res => res.json())
+        .then(resMutacion => {
+            if (resMutacion.data && resMutacion.data.registrarVisualizacion) {
+                const nuevasVistas = resMutacion.data.registrarVisualizacion.visualizaciones;
+                if (contadorEl && nuevasVistas !== undefined) {
+                    contadorEl.textContent = nuevasVistas;
+                }
+            }
+        })
+        .catch(e => console.error("Error al registrar visualización automática:", e));
 
         // Renderizado - Resúmenes
         const resumenesContainer = document.querySelector(".resumenes-container");
@@ -190,7 +223,7 @@ function inicializarDetalleMateriaGraphQL(idMateria) {
             resumenesContainer.innerHTML = '<p class="text-muted text-center w-100">No hay resúmenes cargados para esta materia.</p>';
         }
 
-        // Renderizado - Videos (Carrusel interactivo)
+        // Renderizado - Videos
         const videosContainer = document.querySelector(".videos-container");
         if (materia.videos && materia.videos.length > 0) {
             videosContainer.innerHTML = `
@@ -213,7 +246,6 @@ function inicializarDetalleMateriaGraphQL(idMateria) {
                   </button>
               </div>`;
             
-            // Inicialización segura del carrusel dinámico
             setTimeout(() => {
                 const carouselEl = document.getElementById('materiaVideoCarousel');
                 if (carouselEl && typeof bootstrap !== 'undefined') {
@@ -264,26 +296,24 @@ function playVideo(videoId, titulo) {
         if (videoTitle && titulo) {
             videoTitle.textContent = titulo;
         }
-        
-        // Carga la URL embebida con los parámetros recomendados para reproducción SPA
         videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&enablejsapi=1&rel=0`;
-        
-        // Quitamos la clase 'd-none' de Bootstrap para mostrarlo en pantalla
         videoContainer.classList.remove("d-none");
     } else {
         console.error("No se encontraron los elementos estructurales del video flotante.");
     }
 }
 
+// Guardar referencia limpia de cierre intacta
 function closeVideo() {
     const videoContainer = document.getElementById("floatingVideoContainer");
     const videoFrame = document.getElementById("videoPlayerFrame");
 
     if (videoContainer && videoFrame) {
         videoContainer.classList.add("d-none");
-        videoFrame.src = ""; // Resetea el frame para detener el audio por completo
+        videoFrame.src = ""; 
     }
 }
+
 // ==========================================
 // 4. LÓGICA INTERACTIVA DEL CUESTIONARIO (QUIZ)
 // ==========================================
@@ -292,7 +322,6 @@ function inicializarQuizRecomendador() {
     const quizAlert = document.getElementById("quiz-alert");
     const quizSuggestion = document.getElementById("quiz-suggestion");
 
-    // Salida segura si el HTML de la página no tiene el Quiz renderizado
     if (!opcionesQuiz.length || !quizAlert || !quizSuggestion) return;
 
     opcionesQuiz.forEach(radio => {
@@ -314,13 +343,9 @@ function inicializarQuizRecomendador() {
                     sugerenciaTexto = "Seleccioná una opción para analizar tu caso.";
             }
 
-            // Inyectar el texto correspondiente
             quizSuggestion.textContent = sugerenciaTexto;
-            
-            // Mostrar la alerta removiendo la clase oculta de Bootstrap
             quizAlert.classList.remove("d-none");
 
-            // Limpieza y resaltado visual de la fila del formulario
             document.querySelectorAll(".quiz-row").forEach(row => {
                 row.style.backgroundColor = "#ffffff";
                 row.style.borderColor = "rgba(0,0,0,0.1)";
@@ -328,8 +353,8 @@ function inicializarQuizRecomendador() {
 
             const filaActiva = radio.closest(".quiz-row");
             if (filaActiva) {
-                filaActiva.style.backgroundColor = "#fbf5ed"; // Tono crema suave
-                filaActiva.style.borderColor = "#6b3700";       // Borde chocolate
+                filaActiva.style.backgroundColor = "#fbf5ed"; 
+                filaActiva.style.borderColor = "#6b3700";       
             }
         });
     });

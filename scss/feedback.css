@@ -1,0 +1,37 @@
+/* scss/feedback.css */
+
+.seccion-interactiva-materia {
+  background-color: #ffffff !important;
+  border: 1px solid #e9e2db !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(74, 38, 0, 0.05) !important;
+}
+
+/* Fuerza a los iconos de las estrellas a reaccionar e interactuar */
+.estrellas-voto i {
+  font-size: 2rem !important;
+  color: #ccc !important;
+  cursor: pointer !important; /* Muestra el puntero de selección al pasar el mouse */
+  display: inline-block;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.estrellas-voto i:hover {
+  transform: scale(1.15);
+}
+
+/* Color dorado cuando el mouse pasa por encima o cuando se hace click */
+.estrellas-voto i.active,
+.estrellas-voto i.bi-star-fill {
+  color: #ffc107 !important; 
+}
+
+.badge-stats {
+  background-color: #f5ece1 !important;
+  color: #4a2600 !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 16px;
+  border-radius: 50px;
+  display: inline-block;
+}
