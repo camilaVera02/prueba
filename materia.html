@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="style.css">
   
   <style>
-    /* Caja minimalista para mostrar las vistas sin sobrecargar la vista */
+    /* ==========================================
+       ESTILOS EXCLUSIVOS DE LA VISTA DETALLE
+       ========================================== */
     .seccion-metricas-materia {
       background-color: #ffffff !important;
       border: 1px solid #e9e2db !important;
@@ -25,18 +27,19 @@
       border-radius: 50px;
       display: inline-block;
     }
+
+
   </style>
 </head>
 <body>
-<a href="index.html" class="btn-minimalista">
-  <span class="flecha">‹</span> Volver
-</a>
+
+
    
 <div class="container-fluid px-3 mt-3 mt-sm-5">
         <h1 class="titulo-materia">Cargando Materia...</h1>
 
-        <div class="descripcion text-center mb-2">
-            <p id="descripcion-materia" class="lead" style="font-size: 1.25rem;">Recursos académicos interactivos obtenidos desde el servidor.</p>
+        <div id="contenedor-descripcion-materia" class="descripcion text-center mb-2">
+            <p class="lead" style="font-size: 1.25rem;">Recursos académicos interactivos obtenidos desde el servidor.</p>
         </div>
 
         <h2 class="title-categorias">Resúmenes.</h2>
@@ -71,7 +74,6 @@
   const urlParams = new URLSearchParams(valoresUrl);
   const materiaIdSeleccionada = urlParams.get('id');
 
-  // PLAN B AUTOMÁTICO: Detecta si estás testeando en tu compu o si corre en producción
   const ENDPOINT_SERVER = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
     ? "http://localhost:4000/"
     : "https://servidor-graphql-production.up.railway.app/";
@@ -102,8 +104,6 @@
   // =======================================================
   // 3. PETICIONES ASÍNCRONAS A GRAPHQL
   // =======================================================
-  
-  // QUERY: Pide la información inicial incluyendo 'descripcion'
   async function pedirMateriaPorId(id) {
     const response = await fetch(ENDPOINT_SERVER, {
       method: "POST",
@@ -127,7 +127,6 @@
     return resultado.data.materiaPorId;
   }
 
-  // MUTATION: Avisa al servidor que alguien entró a la materia para sumar +1
   async function mutacionRegistrarVista(id) {
     try {
       const response = await fetch(ENDPOINT_SERVER, {
@@ -167,21 +166,18 @@
         return;
       }
 
-     // Render - Título de la materia
-document.querySelector(".titulo-materia").textContent = materia.nombre;
+      document.querySelector(".titulo-materia").textContent = materia.nombre;
 
-// INYECCIÓN LIMPIA EN EL CONTENEDOR:
-const contenedorDescripcion = document.getElementById("contenedor-descripcion-materia");
-if (contenedorDescripcion) {
-  // Sobreescribimos todo el HTML interno con la descripción real usando la clase lead nativa
-  contenedorDescripcion.innerHTML = `<p class="lead" style="font-size: 1.25rem;">${materia.descripcion || "Sin descripción disponible para esta materia."}</p>`;
-}
+      // INYECCIÓN LIMPIA EN EL CONTENEDOR (¡Ahora funcionando perfectamente!):
+      const contenedorDescripcion = document.getElementById("contenedor-descripcion-materia");
+      if (contenedorDescripcion) {
+        contenedorDescripcion.innerHTML = `<p class="lead" style="font-size: 1.25rem;">${materia.descripcion || "Sin descripción disponible para esta materia."}</p>`;
+      }
 
-document.getElementById("contador-vistas").textContent = materia.visualizaciones || 0;
-      // DETECTAR ENTRADA: Ejecuta la mutación para sumar la nueva visita en background
+      document.getElementById("contador-vistas").textContent = materia.visualizaciones || 0;
+      
       mutacionRegistrarVista(materiaIdSeleccionada).then(nuevasVistas => {
         if (nuevasVistas !== undefined && nuevasVistas !== null) {
-          // Actualiza el número en pantalla en tiempo real con el dato actualizado
           document.getElementById("contador-vistas").textContent = nuevasVistas;
         }
       });
@@ -215,7 +211,7 @@ document.getElementById("contador-vistas").textContent = materia.visualizaciones
         resumenesContainer.innerHTML = '<p class="text-muted">No hay resúmenes cargados para esta materia.</p>';
       }
 
-      // Render - Videos (Carrusel de Bootstrap)
+      // Render - Videos
       const videosContainer = document.querySelector(".videos-container");
       if (materia.videos && materia.videos.length > 0) {
         videosContainer.innerHTML = `

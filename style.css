@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Space+Grotesk:wght@400..700&display=swap');
+body {
+    background-color: #fcfaf7; /* Un blanco roto / lino súper cálido que combina con tu marca */
+}
 /* =======================================================
    1. VARIABLES DE DISEÑO (ORIGINALES DE TU STYLE.CSS)
    ======================================================= */   
@@ -72,6 +76,41 @@ a.nav-link.active {
    4. SECCIÓN ESPECÍFICA DE TÉCNICAS DE ESTUDIO (100% ORIGINAL)
    ======================================================= */
 /* Modificaciones al Hero original y Título */
+/* ==========================================
+   SECCIÓN TÉCNICAS: REPARADA Y AISLADA
+   ========================================== */
+.seccion-tecnicas {
+    /* 1. Control de flujo para evitar que se superponga */
+    display: block !important;
+    clear: both !important; /* Rompe cualquier elemento flotante previo */
+    position: relative !important;
+    
+    /* 2. Separación armónica con los otros containers */
+    margin-top: 3rem !important; 
+    margin-bottom: 3rem !important;
+    padding: 2.5rem 1.5rem !important;
+    
+    /* 3. Estética base en sintonía con el sitio */
+    background-color: #ffffff !important;
+    border: 1px solid #e9e2db !important;
+    border-radius: 16px !important;
+    
+    /* 4. Sombra suave para dar volumen sin romper la grilla */
+    box-shadow: 0 10px 30px rgba(74, 38, 0, 0.04) !important;
+    
+    /* Asegura que el contenedor respete su propio tamaño interno */
+    box-sizing: border-box !important;
+    overflow: hidden !important; 
+}
+
+/* Ajuste responsivo para que en celulares no apriete los textos */
+@media (max-width: 576px) {
+    .seccion-tecnicas {
+        margin-top: 2rem !important;
+        margin-bottom: 2rem !important;
+        padding: 1.5rem 1rem !important;
+    }
+}
 .hero {
     background: var(--card);
     border-radius: var(--radius);
@@ -654,3 +693,369 @@ a.nav-link.active {
         width: 250px !important;
     }
 }
+/* Botón Volver Arriba Flotante (Cambiado a la izquierda) */
+.btn-scroll-top {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #6b3700; 
+    color: #ffffff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1050; 
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Efecto Hover */
+.btn-scroll-top:hover {
+    background-color: #522a00;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Clase dinámica que aplica JavaScript */
+.btn-scroll-top.mostrar {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Ajuste Responsivo para Celulares */
+@media (max-width: 576px) {
+    .btn-scroll-top {
+        bottom: 20px;
+        left: 20px; 
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* ==========================================
+   DISEÑO HERO FULL-WIDTH REPARADO Y RESPONSIVO
+   ========================================== */
+.hero-full-width {
+    position: relative;
+    /* Técnica para salir de los márgenes del 'container' sin romper el diseño */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    
+    margin-top: -3rem; /* Sube un poco para compensar el margen superior */
+    margin-bottom: 4rem;
+    padding: 5rem 1rem;
+    background: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1920') no-repeat center center/cover;
+    overflow: hidden;
+}
+
+/* Capa translúcida */
+/* Capa intermedia con efecto de luz reflejada en movimiento */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%; /* Ancho extra para que el degradado tenga espacio para desplazarse */
+    height: 100%;
+    
+    /* Degradado base combinado con un haz de luz blanca reflectante en el centro (45% a 55%) */
+    background: linear-gradient(
+        115deg, 
+        rgba(253, 251, 247, 0.94) 0%, 
+        rgba(253, 251, 247, 0.94) 40%, 
+        rgba(255, 255, 255, 0.4) 48%,  /* El "reflejo" de luz */
+        rgba(255, 255, 255, 0.7) 50%,  /* Punto máximo de luz */
+        rgba(255, 255, 255, 0.4) 52%,  /* El "reflejo" de luz disminuyendo */
+        rgba(245, 238, 230, 0.9) 60%, 
+        rgba(245, 238, 230, 0.9) 100%
+    );
+    
+    background-size: 200% 100%; /* Duplica el tamaño horizontal del fondo para permitir el movimiento */
+    z-index: 1;
+    
+    /* Activamos la animación: dura 7 segundos, es sutil, lineal e infinita */
+    animation: reflejoLuz 7s linear infinite;
+}
+
+/* Contenido del Hero (Logo y flecha) */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+}
+
+/* ==========================================
+   ANIMACIÓN DEL REFLEJO DE LUZ
+   ========================================== */
+@keyframes reflejoLuz {
+    0% {
+        background-position: 200% 0%;
+    }
+    100% {
+        background-position: -200% 0%;
+    }
+}
+
+
+/* Caja contenedora del Logo */
+.hero-logo-box {
+    max-width: 400px;
+    width: 85%; /* Se achica proporcionalmente en pantallas móviles */
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px rgba(96, 56, 19, 0.08);
+    transition: all 0.3s ease;
+}
+
+.logo-banner-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Ocultos si tu imagen ya tiene el texto de la marca */
+.hero-main-title { display: none; }
+.hero-tagline { display: none; }
+
+/* Animación sutil de la flecha */
+.scroll-indicator {
+    font-size: 1.3rem;
+    color: #603813;
+    animation: bounce 2s infinite;
+    opacity: 0.6;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-6px); }
+    60% { transform: translateY(-3px); }
+}
+
+/* ==========================================
+   MEDIA QUERIES (REPARACIÓN PARA CELULARES)
+   ========================================== */
+@media (max-width: 768px) {
+    .hero-full-width {
+        padding: 3rem 0; /* Menos espacio vertical en celulares */
+        margin-bottom: 2.5rem;
+    }
+    
+    .hero-logo-box {
+        max-width: 280px; /* Logo más pequeño en pantallas chicas para que no desborde */
+        padding: 10px;
+        border-radius: 15px;
+    }
+
+    /* Ajuste para las tarjetas de creadores y objetivos en celulares */
+    .section-presentacion {
+        padding: 1.5rem !important;
+        margin-bottom: 2rem !important;
+    }
+    
+    .section-title-center {
+        font-size: 1.5rem !important;
+    }
+    
+    .section-text-lead {
+        font-size: 1rem !important;
+    }
+}
+
+/* 1. Tipografía base para todo el cuerpo de la página (Objetivos, textos, etc.) */
+body, .section-text-lead, .text-muted {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: -0.1px; /* Hace que el texto se vea más compacto y moderno */
+}
+
+/* 2. Estilo para el Título del Banner (Si usás texto) y títulos de secciones */
+.hero-main-title, .section-title-center, .creador-nombre {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.5px; /* Estilo tipográfico muy usado en tecnología */
+}
+
+/* 3. Ajuste fino para el texto del Objetivo para que se lea hermoso */
+.section-text-lead {
+    font-weight: 500;
+    line-height: 1.8;
+    color: #3d312a; /* Un marrón oscuro súper legible */
+}
+
+/* 4. Por si acaso, si todavía usás títulos nativos h1, h2, h3 en otras vistas */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ==========================================
+   ESTILIZACIÓN PREMIUM DE SECCIONES (CON FONDO)
+   ========================================== */
+
+/* Tarjetas de Objetivo y Creadores */
+.section-presentacion {
+    /* Fondo degradado muy suave con los tonos tierra de tu marca */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(245, 238, 230, 0.6) 100%);
+    
+    /* El truco del vidrio esmerilado: desenfoca sutilmente lo que haya detrás */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* Borde suave con el color terracota/canela de tu logo muy diluido */
+    border: 1px solid rgba(192, 125, 83, 0.15);
+    
+    /* Sombra profunda pero muy suave para dar volumen y despegarlas del fondo general */
+    box-shadow: 0 10px 30px rgba(96, 56, 19, 0.05) !important;
+    
+    transition: all 0.4s ease-in-out;
+    padding: 3rem 2rem !important; /* Más espacio interno para que respire el texto */
+}
+
+/* Efecto interactivo al pasar el mouse por encima de las secciones */
+.section-presentacion:hover {
+    transform: translateY(-2px);
+    border-color: rgba(192, 125, 83, 0.3);
+    box-shadow: 0 15px 35px rgba(96, 56, 19, 0.08) !important;
+}
+
+/* Sub-tarjetas internas de los Creadores */
+.creador-card {
+    /* Fondo blanco más sólido para que contraste con la tarjeta de fondo */
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(96, 56, 19, 0.1);
+    border-radius: 14px;
+    padding: 1.8rem 1.2rem !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
+}
+
+/* Efecto hover individual para cada creador */
+.creador-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    background-color: #ffffff;
+    border-color: #c07d53; /* Color canela de tu logo */
+    box-shadow: 0 8px 25px rgba(192, 125, 83, 0.15);
+}
+
+/* Ajuste del emoji/avatar del creador para que resalte más */
+.creador-avatar {
+    font-size: 2.2rem;
+    display: inline-block;
+    margin-bottom: 0.8rem;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+/* ==========================================
+   CREADORES: TEXTO CON HAZ DE LUZ ANIMADO
+   ========================================== */
+.creadores-texto {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.05rem; /* Subimos un pelín el tamaño para que el brillo se luzca más */
+    color: #2b1a0d; 
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.creadores-titulo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: #603813; /* El marrón de tu marca queda fijo para contrastar */
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+/* La magia: El haz de luz viviendo ADENTRO de las letras */
+.nombres-brillantes {
+    display: inline-block;
+    vertical-align: middle;
+    
+    /* Degradado: Marrón oscuro -> Destello Blanco Puro -> Marrón oscuro */
+    background: linear-gradient(
+        120deg, 
+        #2b1a0d 0%, 
+        #2b1a0d 40%, 
+        #c07d53 48%, /* Destello color canela de transición */
+        #ffffff 50%, /* El punto máximo del haz de luz blanca */
+        #c07d53 52%, 
+        #2b1a0d 60%, 
+        #2b1a0d 100%
+    );
+    
+    background-size: 200% auto; /* Le da recorrido horizontal al degradado */
+    
+    /* Enmascaramos el fondo para que solo pinte el texto */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent; /* Hace transparente el relleno nativo para que se vea el degradado */
+    
+    /* Animación del haz de luz: pasa cada 5 segundos de forma infinita */
+    animation: brilloTexto 5s linear infinite;
+}
+
+/* ==========================================
+   ANIMACIÓN DEL DESTELLO EN LAS LETRAS
+   ========================================== */
+@keyframes brilloTexto {
+    0% {
+        background-position: 200% center;
+    }
+    100% {
+        background-position: -200% center;
+    }
+}
+
+/* Ajuste responsivo para celulares */
+@media (max-width: 768px) {
+    .creadores-texto {
+        font-size: 0.9rem;
+        line-height: 2;
+    }
+    .creadores-titulo {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    .nombres-brillantes {
+        display: block;
+        padding: 0 10px;
+    }
+}
+
+/* ==========================================
+   BOTÓN VOLVER CONTEXTUAL Y MINIMALISTA
+   ========================================== */
+.btn-volver-minimal {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #603813; /* El color principal de tu marca (marrón) */
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Espacio entre la flecha y el texto */
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    padding: 5px 0;
+}
+
+/* Estilo para la flecha */
+.btn-volver-minimal .flecha-regresar {
+    font-size: 1.1rem;
+    line-height: 1;
+    transition: transform 0.3s ease;
+}
+

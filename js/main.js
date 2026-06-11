@@ -88,6 +88,11 @@ const MAPA_ICONOS = {
 };
 
 function inicializarMateriasGraphQL() {
+    // REVISIÓN ANTICIPADA: Si no estamos en la página de materias (no existe el contenedor),
+    // cancelamos la ejecución de inmediato antes de gastar recursos haciendo el fetch.
+    const contenedor = document.querySelector(".categoria-container");
+    if (!contenedor) return;
+
     fetch(ENDPOINT_SERVER, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -95,7 +100,7 @@ function inicializarMateriasGraphQL() {
     })
     .then(res => res.json())
     .then(resultado => {
-        const contenedor = document.querySelector(".categoria-container");
+        // (Por seguridad dejamos este también, aunque el de arriba ya filtró todo)
         if (!contenedor) return;
 
         if (!resultado.data || resultado.data.materias.length === 0) {
@@ -115,8 +120,9 @@ function inicializarMateriasGraphQL() {
     })
     .catch(err => {
         console.error(err);
-        const contenedor = document.querySelector(".categoria-container");
-        if(contenedor) contenedor.innerHTML = `<div class="alert alert-danger w-100 text-center">Error al conectar con el servidor Apollo.</div>`;
+        if (contenedor) {
+            contenedor.innerHTML = `<div class="alert alert-danger w-100 text-center">Error al conectar con el servidor Apollo.</div>`;
+        }
     });
 }
 
@@ -359,3 +365,48 @@ function inicializarQuizRecomendador() {
         });
     });
 }
+// ==========================================
+// 5. CONTROLADOR DEL BOTÓN VOLVER ARRIBA (SCROLL INTELIGENTE)
+// ==========================================
+window.addEventListener("scroll", () => {
+    const btnArriba = document.getElementById("btn-volver-arriba");
+    if (!btnArriba) return;
+
+    // Si el usuario scrolleó más de 300px hacia abajo, muestra el botón
+    if (window.scrollY > 300) {
+        btnArriba.classList.add("mostrar");
+    } else {
+        btnArriba.classList.remove("mostrar");
+    }
+});
+
+// Evento de clic para subir suavemente
+document.addEventListener("DOMContentLoaded", () => {
+    const btnArriba = document.getElementById("btn-volver-arriba");
+    if (btnArriba) {
+        btnArriba.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth" /* Subida fluida y elegante */
+            });
+        });
+    }
+});
+
+// ==========================================
+// 6. ENRUTADOR INICIAL (CARGA AUTOMÁTICA AL ENTRAR)
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    // Verificamos si la URL ya tiene parámetros de ID (por si el usuario recarga estando en una materia)
+    const urlParams = new URLSearchParams(window.location.search);
+    const idMateria = urlParams.get('id');
+
+    if (idMateria) {
+        // Si el usuario entró directo usando un enlace a una materia, cargamos esa sección
+        cargarPagina(`materia.html?id=${idMateria}`);
+    } else {
+        // Si entra al Home por primera vez, forzamos la carga automática del inicio
+        cargarPagina('inicio.html');
+    }
+}
+);

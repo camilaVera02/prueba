@@ -17,7 +17,7 @@
    <nav class="navbar navbar-expand-lg navbar-dark custom-nav sticky-top py-3">
     <div class="container">
         <!-- Logo y Nombre con Tipografía Serif Académica -->
-        <a class="navbar-brand d-flex align-items-center gap-3 fs-3" href="#" onclick="cargarPagina('inicio-contenido.html')" style="text-decoration: none;">
+        <a class="navbar-brand d-flex align-items-center gap-3 fs-3" href="#" onclick="cargarPagina('inicio.html')" style="text-decoration: none;">
             <img src="image/logoNAV.png" alt="Logo" width="45" height="45" class="d-inline-block align-text-top rounded-3 shadow-sm" style="object-fit: cover;">
             <!-- Aplicamos la nueva tipografía fina y elegante aquí -->
             <span style="font-family: 'Playfair Display', Georgia, serif; font-weight: 500; letter-spacing: 0.5px; color: #fff;">CFU Tech</span>
@@ -30,13 +30,13 @@
         <div class="collapse navbar-collapse" id="menuPrincipal">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 nav-pills gap-2 align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#" onclick="cargarPagina('inicio-contenido.html')">Inicio</a>
+                    <a class="nav-link active" href="#" onclick="cargarPagina('inicio.html')">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" onclick="cargarPagina('inicio-contenido.html')">Materias</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="cargarPagina('tecnicas.html')">Técnica</a>
+                    <a class="nav-link" href="#" onclick="cargarPagina('tecnicas.html')">Técnicas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" onclick="cargarPagina('ia.html')">IA</a>
@@ -67,6 +67,9 @@
     </button>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <button id="btn-volver-arriba" class="btn-scroll-top" title="Volver arriba">
+        ▲
+    </button>
     <script src="js/main.js"></script>
 </body>
 </html>
