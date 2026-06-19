@@ -9,7 +9,7 @@
   
   <style>
     /* ==========================================
-       ESTILOS EXCLUSIVOS DE LA VISTA DETALLE
+       ESTILOS EXCLUSIVOS DE LA VISTA DETALLE, lo pusimos directo para no perderlo
        ========================================== */
     .seccion-metricas-materia {
       background-color: #ffffff !important;
@@ -73,13 +73,13 @@
   const valoresUrl = window.location.search;
   const urlParams = new URLSearchParams(valoresUrl);
   const materiaIdSeleccionada = urlParams.get('id');
-
+//tuvimos que averguar como armar una función que tome el servidor local en caso de fallar el que tenemos en la nube, es un PLAN B
   const ENDPOINT_SERVER = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
     ? "http://localhost:4000/"
     : "https://servidor-graphql-production.up.railway.app/";
 
   // =======================================================
-  // 2. FILTROS DE SEGURIDAD PARA CONTENIDOS EMBEBIDOS
+  // 2. FILTROS DE SEGURIDAD PARA CONTENIDOS EMBEBIDOS, básicamente modifica las URL para que la etiqueta de IFRAME pueda mostrarlo sin ningún problema
   // =======================================================
   function limpiarUrlDrive(urlOriginal) {
     if (!urlOriginal || urlOriginal === "---") return null;
@@ -102,10 +102,10 @@
   }
 
   // =======================================================
-  // 3. PETICIONES ASÍNCRONAS A GRAPHQL
+  // 3. PETICIONES  A GRAPHQL
   // =======================================================
   async function pedirMateriaPorId(id) {
-    const response = await fetch(ENDPOINT_SERVER, {
+    const response = await fetch(ENDPOINT_SERVER, { //según el endpoint local o en el server de raily 
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -152,6 +152,7 @@
   // =======================================================
   // 4. CONTROL DE FLUJO AL CARGAR LA PÁGINA
   // =======================================================
+  //en cada sección de la meteria se completara con la info que devuelve la QUERY
   document.addEventListener("DOMContentLoaded", () => {
     
     if (!materiaIdSeleccionada) {
@@ -168,7 +169,7 @@
 
       document.querySelector(".titulo-materia").textContent = materia.nombre;
 
-      // INYECCIÓN LIMPIA EN EL CONTENEDOR (¡Ahora funcionando perfectamente!):
+      // INYECCIÓN LIMPIA EN EL CONTENEDOR 
       const contenedorDescripcion = document.getElementById("contenedor-descripcion-materia");
       if (contenedorDescripcion) {
         contenedorDescripcion.innerHTML = `<p class="lead" style="font-size: 1.25rem;">${materia.descripcion || "Sin descripción disponible para esta materia."}</p>`;

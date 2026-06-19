@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Space+Grotesk:wght@400..700&display=swap');
 body {
-    background-color: #fcfaf7; /* Un blanco roto / lino súper cálido que combina con tu marca */
+    background-color: #fcfaf7; 
 }
 /* =======================================================
-   1. VARIABLES DE DISEÑO (ORIGINALES DE TU STYLE.CSS)
+   1. VARIABLES DE DISEÑO 
    ======================================================= */   
 :root {
     --navbar: #6b3700;
@@ -43,11 +43,11 @@ h1 {
 }
 
 /* =======================================================
-   3. BARRAS DE NAVEGACIÓN ORIGINALES Y COMPATIBLES
+   3. BARRAS DE NAVEGACIÓN 
    ======================================================= */
 nav {
     padding: 10px 30px;
-    background-color: #5d350a; /* Fondo oscuro universitario */
+    background-color: #5d350a; /* Fondo oscuro */
 }
 
 .custom-nav {
@@ -73,7 +73,7 @@ a.nav-link.active {
 }
 
 /* =======================================================
-   4. SECCIÓN ESPECÍFICA DE TÉCNICAS DE ESTUDIO (100% ORIGINAL)
+   4. SECCIÓN ESPECÍFICA DE TÉCNICAS DE ESTUDIO 
    ======================================================= */
 /* Modificaciones al Hero original y Título */
 /* ==========================================
@@ -90,7 +90,7 @@ a.nav-link.active {
     margin-bottom: 3rem !important;
     padding: 2.5rem 1.5rem !important;
     
-    /* 3. Estética base en sintonía con el sitio */
+    /* 3.base */
     background-color: #ffffff !important;
     border: 1px solid #e9e2db !important;
     border-radius: 16px !important;
@@ -118,7 +118,7 @@ a.nav-link.active {
     box-shadow: var(--shadow);
 }
 
-/* Mantiene el título "Aprendé a estudiar mejor" idéntico */
+/* Mantiene el título "Aprendé a estudiar mejor"*/
 .hero h1.fw-bold {
     font-family: 'Poppins', sans-serif !important;
     font-weight: 700 !important;
@@ -543,7 +543,7 @@ a.nav-link.active {
 }
 
 /* =======================================================
-   6. ELEMENTOS FLOTANTES INTEGRADOS (100% FIEL A TU SCRIPT)
+   6. ELEMENTOS FLOTANTES
    ======================================================= */
 /* Botón Subir Global Integrado */
 #btnScrollToTop {
@@ -575,7 +575,7 @@ a.nav-link.active {
     right: 20px !important;
     width: 380px !important;
     max-width: 85vw !important; /* Evita salirse en celulares */
-    z-index: 2100 !important;   /* Z-index alto para flotar SOBRE los iframes de PDF */
+    z-index: 2100 !important;   
     background-color: #1a1a1a !important;
     border: 2px solid #a85b0b !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
@@ -585,7 +585,6 @@ a.nav-link.active {
     transition: all 0.3s ease;
 }
 
-/* Clases específicas para el colapso por JS del reproductor flotante original */
 .floating-video-box.minimized {
     width: 200px !important;
     height: auto !important;
@@ -745,7 +744,6 @@ a.nav-link.active {
    ========================================== */
 .hero-full-width {
     position: relative;
-    /* Técnica para salir de los márgenes del 'container' sin romper el diseño */
     width: 100vw;
     position: relative;
     left: 50%;
@@ -753,7 +751,7 @@ a.nav-link.active {
     margin-left: -50vw;
     margin-right: -50vw;
     
-    margin-top: -3rem; /* Sube un poco para compensar el margen superior */
+    margin-top: -3rem; 
     margin-bottom: 4rem;
     padding: 5rem 1rem;
     background: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1920') no-repeat center center/cover;
@@ -769,14 +767,13 @@ a.nav-link.active {
     width: 200%; /* Ancho extra para que el degradado tenga espacio para desplazarse */
     height: 100%;
     
-    /* Degradado base combinado con un haz de luz blanca reflectante en el centro (45% a 55%) */
-    background: linear-gradient(
+     background: linear-gradient(
         115deg, 
         rgba(253, 251, 247, 0.94) 0%, 
         rgba(253, 251, 247, 0.94) 40%, 
-        rgba(255, 255, 255, 0.4) 48%,  /* El "reflejo" de luz */
-        rgba(255, 255, 255, 0.7) 50%,  /* Punto máximo de luz */
-        rgba(255, 255, 255, 0.4) 52%,  /* El "reflejo" de luz disminuyendo */
+        rgba(255, 255, 255, 0.4) 48%,  /* El "reflejo""" de luz */
+        rgba(255, 255, 255, 0.7) 50%,  
+        rgba(255, 255, 255, 0.4) 52%, 
         rgba(245, 238, 230, 0.9) 60%, 
         rgba(245, 238, 230, 0.9) 100%
     );
@@ -784,7 +781,7 @@ a.nav-link.active {
     background-size: 200% 100%; /* Duplica el tamaño horizontal del fondo para permitir el movimiento */
     z-index: 1;
     
-    /* Activamos la animación: dura 7 segundos, es sutil, lineal e infinita */
+  
     animation: reflejoLuz 7s linear infinite;
 }
 
@@ -827,11 +824,11 @@ a.nav-link.active {
     object-fit: contain;
 }
 
-/* Ocultos si tu imagen ya tiene el texto de la marca */
+
 .hero-main-title { display: none; }
 .hero-tagline { display: none; }
 
-/* Animación sutil de la flecha */
+/* flechap */
 .scroll-indicator {
     font-size: 1.3rem;
     color: #603813;
@@ -875,27 +872,24 @@ a.nav-link.active {
     }
 }
 
-/* 1. Tipografía base para todo el cuerpo de la página (Objetivos, textos, etc.) */
+/* 1. Tipografía base para todo el cuerpo de la página  */
 body, .section-text-lead, .text-muted {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    letter-spacing: -0.1px; /* Hace que el texto se vea más compacto y moderno */
+    letter-spacing: -0.1px; 
 }
 
-/* 2. Estilo para el Título del Banner (Si usás texto) y títulos de secciones */
+/* 2. Estilo para el Título del Banner  y títulos de secciones */
 .hero-main-title, .section-title-center, .creador-nombre {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
-    letter-spacing: -0.5px; /* Estilo tipográfico muy usado en tecnología */
-}
+    letter-spacing: -0.5px; 
 
-/* 3. Ajuste fino para el texto del Objetivo para que se lea hermoso */
 .section-text-lead {
     font-weight: 500;
     line-height: 1.8;
-    color: #3d312a; /* Un marrón oscuro súper legible */
+    color: #3d312a; 
 }
 
-/* 4. Por si acaso, si todavía usás títulos nativos h1, h2, h3 en otras vistas */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', sans-serif;
 }
@@ -941,15 +935,14 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.3s ease;
 }
 
-/* Efecto hover individual para cada creador */
+/* Efecto hover individual para cada uno de nustrsos nombres */
 .creador-card:hover {
     transform: translateY(-5px) scale(1.02);
     background-color: #ffffff;
-    border-color: #c07d53; /* Color canela de tu logo */
+    border-color: #c07d53;
     box-shadow: 0 8px 25px rgba(192, 125, 83, 0.15);
 }
 
-/* Ajuste del emoji/avatar del creador para que resalte más */
 .creador-avatar {
     font-size: 2.2rem;
     display: inline-block;
@@ -962,7 +955,7 @@ h1, h2, h3, h4, h5, h6 {
    ========================================== */
 .creadores-texto {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.05rem; /* Subimos un pelín el tamaño para que el brillo se luzca más */
+    font-size: 1.05rem; 
     color: #2b1a0d; 
     font-weight: 600;
     letter-spacing: 0.3px;
@@ -988,21 +981,19 @@ h1, h2, h3, h4, h5, h6 {
         120deg, 
         #2b1a0d 0%, 
         #2b1a0d 40%, 
-        #c07d53 48%, /* Destello color canela de transición */
-        #ffffff 50%, /* El punto máximo del haz de luz blanca */
+        #c07d53 48%, 
+        #ffffff 50%, 
         #c07d53 52%, 
         #2b1a0d 60%, 
         #2b1a0d 100%
     );
     
-    background-size: 200% auto; /* Le da recorrido horizontal al degradado */
+    background-size: 200% auto; 
     
     /* Enmascaramos el fondo para que solo pinte el texto */
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent; /* Hace transparente el relleno nativo para que se vea el degradado */
-    
-    /* Animación del haz de luz: pasa cada 5 segundos de forma infinita */
     animation: brilloTexto 5s linear infinite;
 }
 
@@ -1042,11 +1033,11 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 0.9rem;
     font-weight: 600;
-    color: #603813; /* El color principal de tu marca (marrón) */
+    color: #603813; 
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 8px; /* Espacio entre la flecha y el texto */
+    gap: 8px; 
     opacity: 0.7;
     transition: all 0.3s ease;
     padding: 5px 0;
